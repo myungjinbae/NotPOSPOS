@@ -15,6 +15,7 @@ void order::addItem(item i) {
   {
     itemList.push_back(i);
   }
+  notifyObservers();
 }
 
 std::vector<item> order::getItems() {
@@ -30,10 +31,13 @@ double order::getSubtotal() {
 }
 
 double order::getTax() {
-  return tax;
+  double value=0;
+  value = (tax * getSubtotal());
+  return value;
 }
 
 double order::getTotal() {
+  notifyObservers();
   return getSubtotal() * (1 + tax);
 }
 

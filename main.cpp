@@ -7,7 +7,7 @@
 #include "cashierView.h"
 #include "registerController.h"
 #include "keypadController.h"
-
+#include "ObserverPattern.cpp"
 const char DB_FILE[] = "fruit.db";
 
 int main()
@@ -19,7 +19,12 @@ int main()
   order current;
   keypadController keypad(&current);
   registerController ticket(&inventory,&current);
+  current.addObserver(&keypad);
+  current.addObserver(&ticket);
   ticket.processOrder();
+
+//addObserver()
+//addObserver(ke)
 
   return 0;
 }
